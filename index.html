@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>LENA — Remove Background & Upscale Images Locally</title>
 <meta name="description" content="LENA 1.2 — A simple Windows desktop app to remove backgrounds and upscale images. Processed locally on your PC. 100% free, no login, no ads, no subscription." />
-<script>document.documentElement.className += ' js';</script>
+<script>document.documentElement.classList.add('js');</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;600;700&family=Zalando+Sans+Expanded:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -228,6 +228,10 @@
   .js .reveal{ opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s var(--ease); }
   .js .reveal.in{ opacity:1; transform:translateY(0); }
 
+  @media (prefers-reduced-motion:reduce){
+    .js .reveal, .js .stagger > *, .js .divider,
+    .js .hero-title .line > span { opacity:1 !important; transform:none !important; transition:none !important; }
+  }
   @media (max-width:960px){
     .split{ grid-template-columns:1fr; gap:36px; }
     section{ padding:64px 0; }
@@ -394,3 +398,124 @@
   <div class="modal" style="width:min(520px,100%);" role="dialog" aria-modal="true">
     <div class="modal-head">
       <h3>Support LENA</h3>
+      <button class="modal-close" data-close aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="support-body">
+      <p>LENA is free to use. If you find it useful, you can support the project by sharing it or sending feedback on GitHub.</p>
+      <div class="support-group">
+        <div class="label">Project</div>
+        <a class="support-link" href="https://github.com/hiratsani/LENA-BG-Removal-Upscaler" target="_blank" rel="noopener">View LENA on GitHub <span class="arrow">↗</span></a>
+      </div>
+      <div class="support-group">
+        <div class="label">Feedback</div>
+        <a class="support-link" href="https://github.com/hiratsani/LENA-BG-Removal-Upscaler/issues" target="_blank" rel="noopener">Report an issue <span class="arrow">↗</span></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  'use strict';
+  const $ = (selector) => document.querySelector(selector);
+  const $$ = (selector) => Array.from(document.querySelectorAll(selector));
+
+  const revealAll = () => {
+    $$('.reveal, .stagger, .divider, .hero-title').forEach(el => el.classList.add('in'));
+  };
+
+  // Fail-safe: even if a future edit breaks the observer, content stays accessible.
+  window.addEventListener('error', revealAll);
+  window.addEventListener('unhandledrejection', revealAll);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    try {
+      const year = $('#yr');
+      if (year) year.textContent = new Date().getFullYear();
+
+      const nav = $('#nav');
+      const updateNav = () => nav?.classList.toggle('scrolled', window.scrollY > 16);
+      updateNav();
+      window.addEventListener('scroll', updateNav, { passive: true });
+
+      const menu = $('#menuToggle');
+      const links = $('#navLinks');
+      menu?.setAttribute('aria-expanded', 'false');
+      menu?.addEventListener('click', () => {
+        const open = links.classList.toggle('open');
+        menu.setAttribute('aria-expanded', String(open));
+      });
+      $$('#navLinks a').forEach(a => a.addEventListener('click', () => {
+        links?.classList.remove('open');
+        menu?.setAttribute('aria-expanded', 'false');
+      }));
+
+      // Scroll reveal includes above-the-fold content and sections further down.
+      const items = $$('.reveal, .stagger, .divider, .hero-title');
+      if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        revealAll();
+      } else {
+        const observer = new IntersectionObserver((entries, obs) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in');
+              obs.unobserve(entry.target);
+            }
+          }
+        }, { threshold: 0.05, rootMargin: '0px 0px 45px 0px' });
+        items.forEach(el => observer.observe(el));
+        // Also handle hash navigation to anchors that appear before intersection runs.
+        window.addEventListener('pageshow', () => items.forEach(el => {
+          if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('in');
+        }));
+      }
+
+      const preview = $('#previewModal');
+      const support = $('#supportModal');
+      let lastFocus = null;
+      function openModal(modal) {
+        if (!modal) return;
+        lastFocus = document.activeElement;
+        $$('.modal-backdrop.open').forEach(closeModal);
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        modal.querySelector('[data-close]')?.focus();
+      }
+      function closeModal(modal) {
+        if (!modal) return;
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        if (!document.querySelector('.modal-backdrop.open')) document.body.style.overflow = '';
+        lastFocus?.focus?.();
+      }
+      $('#openPreview')?.addEventListener('click', () => openModal(preview));
+      ['#openSupport', '#openSupport2', '#openSupportFoot'].forEach(selector => {
+        $(selector)?.addEventListener('click', event => { event.preventDefault(); openModal(support); });
+      });
+      $$('.modal-backdrop').forEach(modal => {
+        modal.querySelectorAll('[data-close]').forEach(btn => btn.addEventListener('click', () => closeModal(modal)));
+        modal.addEventListener('click', event => { if (event.target === modal) closeModal(modal); });
+      });
+      document.addEventListener('keydown', event => {
+        if (event.key === 'Escape') $$('.modal-backdrop.open').forEach(closeModal);
+      });
+      $$('.modal-tab').forEach(tab => tab.addEventListener('click', () => {
+        $$('.modal-tab').forEach(btn => btn.classList.toggle('active', btn === tab));
+        $$('.preview-pane').forEach(pane => pane.classList.toggle('active', pane.dataset.pane === tab.dataset.tab));
+      }));
+    } catch (error) {
+      console.error('LENA initialization failed:', error);
+      revealAll();
+    }
+  });
+})();
+</script>
+<noscript><style>
+  .js .reveal, .js .stagger > *, .js .divider,
+  .js .hero-title .line > span { opacity:1 !important; transform:none !important; }
+</style></noscript>
+</body>
+</html>
