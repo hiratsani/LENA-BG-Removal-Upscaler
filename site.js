@@ -1,4 +1,35 @@
 (() => {
+  const scene = document.querySelector('.ambient-scene');
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  const finePointer = matchMedia('(hover: hover) and (pointer: fine)');
+  let ambientFrame = 0;
+  const resetAmbient = () => {
+    cancelAnimationFrame(ambientFrame);
+    ambientFrame = 0;
+    scene.style.setProperty('--ambient-x', '0px');
+    scene.style.setProperty('--ambient-y', '0px');
+  };
+  const syncAmbient = () => {
+    document.documentElement.classList.toggle('ambient-paused', document.hidden || reducedMotion.matches);
+    if (document.hidden || reducedMotion.matches || !finePointer.matches) resetAmbient();
+  };
+  document.addEventListener('pointermove', event => {
+    if (reducedMotion.matches || !finePointer.matches || document.hidden) return;
+    if (ambientFrame) cancelAnimationFrame(ambientFrame);
+    const x = (event.clientX / innerWidth - .5) * 20;
+    const y = (event.clientY / innerHeight - .5) * 14;
+    ambientFrame = requestAnimationFrame(() => {
+      scene.style.setProperty('--ambient-x', `${x.toFixed(2)}px`);
+      scene.style.setProperty('--ambient-y', `${y.toFixed(2)}px`);
+      ambientFrame = 0;
+    });
+  }, {passive: true});
+  document.documentElement.addEventListener('pointerleave', resetAmbient);
+  document.addEventListener('visibilitychange', syncAmbient);
+  reducedMotion.addEventListener('change', syncAmbient);
+  finePointer.addEventListener('change', syncAmbient);
+  syncAmbient();
+
   const menu = document.querySelector('#menuToggle');
   const navigation = document.querySelector('#navLinks');
   const closeMenu = () => {
