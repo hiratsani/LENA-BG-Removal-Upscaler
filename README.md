@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="Hi,%20it's%20LENA.jpg" width="100%" alt="LENA 1.2 — Background Remover & Image Upscaler">
+  <img src="assets/lena-banner.jpg" width="100%" alt="LENA — Background Remover & Image Upscaler">
 </p>
 
 <div align="center">
@@ -16,9 +16,9 @@ Optional **Better** and **Best** models only need to be downloaded once.
 
 <br>
 
-[![Download LENA](https://img.shields.io/badge/Download-LENA_1.2-8A5CF5?style=for-the-badge&logo=windows11&logoColor=white)](https://github.com/hiratsani/LENA-BG-Removal-Upscaler/releases/download/v1.2.0/LENA.1.2.exe)
+[![Download LENA](https://img.shields.io/badge/Download-LENA-8A5CF5?style=for-the-badge&logo=windows11&logoColor=white)](https://github.com/hiratsani/LENA-BG-Removal-Upscaler/releases/download/v1.0.0/LENA-Setup.exe)
 
-**Windows 10 / 11 · 64-bit**
+**Windows 10 / 11 · 64-bit · v1.0.0**
 
 </div>
 
@@ -71,7 +71,7 @@ Optional models are downloaded to your computer once and can be reused offline.
 
 ## 📥 Getting started
 
-1. Download **LENA 1.2.exe** from the release assets.
+1. Download **LENA-Setup.exe** from the release assets.
 2. Run the installer.
 3. Open LENA and add your photo.
 4. Use **Basic**, **Hair & Fur**, or **Upscale** immediately — their models are already included.
@@ -81,7 +81,7 @@ Optional models are downloaded to your computer once and can be reused offline.
 
 ### Ready to try LENA?
 
-[![Download LENA](https://img.shields.io/badge/Download-LENA_1.2-8A5CF5?style=for-the-badge&logo=windows11&logoColor=white)](https://github.com/hiratsani/LENA-BG-Removal-Upscaler/releases/download/v1.2.0/LENA.1.2.exe)
+[![Download LENA](https://img.shields.io/badge/Download-LENA-8A5CF5?style=for-the-badge&logo=windows11&logoColor=white)](https://github.com/hiratsani/LENA-BG-Removal-Upscaler/releases/download/v1.0.0/LENA-Setup.exe)
 
 **Free · Windows 10 / 11 · 64-bit**
 
@@ -120,7 +120,7 @@ LENA includes:
 
 <div align="center">
 
-### LENA 1.2
+### LENA
 
 **Background Remover & Image Upscaler**
 
