@@ -172,3 +172,5 @@ dialog::backdrop{background:#08070bbb;backdrop-filter:blur(8px)}
 .reveal-item{opacity:0;transform:translate3d(0,34px,0);filter:blur(7px);transition:opacity .95s var(--ease),transform .95s var(--ease),filter .8s var(--ease);transition-delay:var(--reveal-delay,0ms)}
 .reveal-item.is-visible{opacity:1;transform:translate3d(0,0,0);filter:blur(0)}
 @media(prefers-reduced-motion:reduce){.reveal-item{opacity:1;transform:none;filter:none}.hero h1,.hero-description,.hero-actions,.hero-meta,.product-showcase{filter:none}}
+
+.hero-meta a{text-decoration:underline;text-decoration-color:#c59bbc55;text-underline-offset:3px;transition:text-decoration-color .2s}.hero-meta a:hover{text-decoration-color:var(--orchid)}

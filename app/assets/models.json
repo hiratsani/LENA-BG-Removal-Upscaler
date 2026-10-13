@@ -1,0 +1,50 @@
+{
+  "birefnet-lite": {
+    "url": "https://huggingface.co/onnx-community/BiRefNet_lite-ONNX/resolve/de15b22ba131738a16dff04aab8bdf8dc32e3ac1/onnx/model_fp16.onnx",
+    "hash": "sha256:d39b897ceb16ae654c1731f3dba0cf9b368d9cae74b5a57459b455cc8bfec402",
+    "size": 114538221,
+    "source": "https://huggingface.co/onnx-community/BiRefNet_lite-ONNX",
+    "format": "onnx",
+    "filename": "model_fp16.onnx",
+    "license": "MIT"
+  },
+  "span": {
+    "url": "https://github.com/Phhofm/models/releases/download/4xNomosUni_span_multijpg/4xNomosUni_span_multijpg_fp32_opset17.onnx",
+    "hash": "sha256:a435b009109e72c50ce95927dab0a6dde63e594cf57ba5a18ba63da67355698a",
+    "size": 1717409,
+    "source": "https://huggingface.co/Phips/4xNomosUni_span_multijpg",
+    "format": "onnx",
+    "filename": "model.onnx",
+    "license": "CC-BY-4.0",
+    "author": "Philip Hofmann"
+  },
+  "isnet-general": {
+    "size": 44229662,
+    "hash": "sha256:3b21a6706dc8d6e4ba9f5b31ebc6940f6c785b58862e27bb25daa9dd4424b87f",
+    "format": "onnx",
+    "filename": "isnet-general-int8.onnx",
+    "bundled": true,
+    "url": "https://huggingface.co/xrds/isnet-general-onnx-int8/resolve/71eff2372ec9c8edbc6ca637ded591423d23b65a/onnx/model_quantized.onnx",
+    "source": "https://huggingface.co/xrds/isnet-general-onnx-int8",
+    "license": "MIT"
+  },
+  "mvanet": {
+    "url": "https://huggingface.co/onnx-community/MVANet-ONNX/resolve/43ec3427514b8d9164eea02df93ca2f1b036bb7b/onnx/model_int8.onnx",
+    "hash": "sha256:1c40de7058fd8fd8a7998ee2ebc401cdbf9451e789493ca7fe5f67c42ef43708",
+    "size": 141076192,
+    "format": "onnx",
+    "filename": "model.onnx",
+    "source": "https://huggingface.co/onnx-community/MVANet-ONNX",
+    "license": "MIT"
+  },
+  "vitmatte-small": {
+    "url": "https://huggingface.co/Xenova/vitmatte-small-composition-1k/resolve/6bc1297f6140f055a227b6d2cfe8c093281f35d2/onnx/model_quantized.onnx",
+    "hash": "sha256:8216103d998864e122333e17d7d346feb1d6558d96bf08695a9838dba4f114e0",
+    "size": 27499369,
+    "format": "onnx",
+    "filename": "model.onnx",
+    "source": "https://huggingface.co/Xenova/vitmatte-small-composition-1k",
+    "license": "Apache-2.0",
+    "original_source": "https://huggingface.co/hustvl/vitmatte-small-composition-1k"
+  }
+}

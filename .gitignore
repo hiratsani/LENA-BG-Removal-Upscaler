@@ -1,0 +1,42 @@
+# Local environments, tools and generated application data
+.venv/
+.build-env/
+.build/
+.test-data/
+.quality-validation/
+.validation-deps/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.env
+.env.*
+settings.json
+ready.json
+*.log
+*.part
+*.tmp
+
+# Weights are prepared from the pinned model manifest, not committed to Git
+*.onnx
+*.pth
+*.pt
+*.safetensors
+
+# Build outputs and local installers
+/Installer/
+dist/
+build/
+*.spec
+*.exe
+*.msi
+*.dll
+*.pyd
+
+# Local editors and OS files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+Desktop.ini
