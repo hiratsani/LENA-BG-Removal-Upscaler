@@ -30,6 +30,34 @@
   finePointer.addEventListener('change', syncAmbient);
   syncAmbient();
 
+  const revealTargets = [...document.querySelectorAll('.benefits li, .section-head, .tool, .workflow, .privacy-grid > div, .faq-intro, .faq-list details, .download-panel')];
+  let revealObserver;
+  const reveal = target => {
+    target.classList.add('is-visible');
+    revealObserver?.unobserve(target);
+  };
+  const setupReveals = () => {
+    revealObserver?.disconnect();
+    if (reducedMotion.matches || !('IntersectionObserver' in window)) {
+      revealTargets.forEach(reveal);
+      return;
+    }
+    revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) reveal(entry.target); });
+    }, {threshold: .12, rootMargin: '0px 0px -24px 0px'});
+    revealTargets.forEach((target, index) => {
+      target.classList.add('reveal-item');
+      target.style.setProperty('--reveal-delay', `${index % 3 * 100}ms`);
+      if (!target.classList.contains('is-visible')) revealObserver.observe(target);
+    });
+  };
+  setupReveals();
+  reducedMotion.addEventListener('change', setupReveals);
+  document.addEventListener('focusin', event => {
+    const target = event.target.closest('.reveal-item');
+    if (target) reveal(target);
+  });
+
   const menu = document.querySelector('#menuToggle');
   const navigation = document.querySelector('#navLinks');
   const closeMenu = () => {
